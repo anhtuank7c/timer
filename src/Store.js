@@ -1,23 +1,14 @@
-import {
-    createNavigationEnabledStore,
-    NavigationReducer
-} from '@exponent/ex-navigation';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
+import { createNavigationEnabledStore } from '@exponent/ex-navigation';
 
 import reducers from './reducers';
 
-const reduxStore = createStore(
-    reducers,
-    {},
-    compose(
-        applyMiddleware(ReduxThunk)
-    )
-);
-
-const store = createNavigationEnabledStore({
-    reduxStore,
-    navigationStateKey: 'navigation'
+const createStoreWithNavigation = createNavigationEnabledStore({
+    createStore,
+    navigationStateKey: 'navigation',
 });
+const createStoreWithMiddleware = applyMiddleware(ReduxThunk)(createStoreWithNavigation);
+const store = createStoreWithMiddleware(reducers);
 
 export default store;

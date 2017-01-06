@@ -1,5 +1,5 @@
 import Exponent from 'exponent';
 import React from 'react';
-import Timer from './src/components/Timer';
+import App from './src/App';
 
-Exponent.registerRootComponent(Timer);
+Exponent.registerRootComponent(App);

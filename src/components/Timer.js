@@ -24,9 +24,14 @@ class Timer extends Component {
         );
     }
 
-    _handlePress = () => {
-        this.props.navigator.push('home');
-    }
+    // _handlePress = () => {
+    //     this.props.navigator.push('home');
+    // }
+}
+const mapStateToProps = (state) => {
+    console.log(state);
+    const { navigation, timer } = state;
+    return { navigation, timer };
 }
 
 export default connect(null, {

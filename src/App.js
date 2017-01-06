@@ -18,7 +18,7 @@ const App = () => {
     return (
         <Provider store={Store}>
             <NavigationProvider context={navigationContext}>
-                <StackNavigation />
+                <StackNavigation initialRoute={'home'} />
             </NavigationProvider>
         </Provider>
     );
