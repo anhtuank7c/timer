@@ -1,0 +1,18 @@
+{
+  "name": "timer",
+  "version": "1.0.0",
+  "description": "Timer ios clone",
+  "author": "anhtuank7c",
+  "private": true,
+  "main": "main.js",
+  "dependencies": {
+    "@exponent/ex-navigation": "^2.7.0",
+    "@exponent/vector-icons": "~2.0.3",
+    "exponent": "~12.0.3",
+    "react": "~15.3.2",
+    "react-native": "git+https://github.com/exponentjs/react-native#sdk-12.0.0",
+    "react-redux": "^5.0.1",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.1.0"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "timer",
+  "description": "Timer clone app",
+  "slug": "timer",
+  "privacy": "public",
+  "sdkVersion": "12.0.0",
+  "version": "1.0.0",
+  "orientation": "portrait",
+  "primaryColor": "#cccccc",
+  "iconUrl": "https://s3.amazonaws.com/exp-brand-assets/ExponentEmptyManifest_192.png",
+  "notification": {
+    "iconUrl": "https://s3.amazonaws.com/exp-us-standard/placeholder-push-icon-blue-circle.png",
+    "color": "#000000"
+  },
+  "loading": {
+    "iconUrl": "https://s3.amazonaws.com/exp-brand-assets/ExponentEmptyManifest_192.png",
+    "hideExponentText": true,
+    "backgroundImageUrl": "https://mir-s3-cdn-cf.behance.net/project_modules/disp/15549a14589707.5628669c64769.png"
+  },
+  "packagerOpts": {
+    "assetExts": [
+      "ttf",
+      "mp4",
+      "mp3"
+    ]
+  },
+  "ios": {
+    "supportsTablet": true
+  }
+}
