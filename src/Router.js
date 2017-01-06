@@ -5,7 +5,7 @@ import RingToneList from './components/RingToneList';
 
 const Router = createRouter(() => ({
     home: () => Timer,
-    chooseRingTone: () => RingToneList,
+    ringToneList: () => RingToneList,
 }));
 
 export default Router;

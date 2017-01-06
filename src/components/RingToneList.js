@@ -16,9 +16,9 @@ class RingToneList extends Component {
         );
     }
 
-    _handlePress = () => {
-        this.props.navigator.pop();
-    }
+    // _handlePress = () => {
+    //     this.props.navigator.pop();
+    // }
 }
 
 export default RingToneList;
