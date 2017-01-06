@@ -29,12 +29,11 @@ class Timer extends Component {
     // }
 }
 const mapStateToProps = (state) => {
-    console.log(state);
     const { navigation, timer } = state;
     return { navigation, timer };
-}
+};
 
-export default connect(null, {
+export default connect(mapStateToProps, {
     changeHour,
     changeMinute,
     changeRingTone
