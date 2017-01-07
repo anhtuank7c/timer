@@ -4,10 +4,14 @@ import {
     CHANGE_RING_TONE
 } from '../actions/types';
 
+import data from './list.json';
+
 const INITIAL = {
     hour: 0,
     minute: 1,
-    ringTone: '../../assets/faded.mp3'
+    hourList: data.hourList,
+    minuteList: data.minuteList,
+    ringTone: '../../assets/faded.mp3',
 };
 
 export default (state = INITIAL, action) => {
@@ -21,4 +25,4 @@ export default (state = INITIAL, action) => {
         default:
             return state;
     }
-}
+};

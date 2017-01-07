@@ -10,8 +10,8 @@ export const changeHour = ({ hour }) => {
             type: CHANGE_HOUR,
             payload: hour
         });
-    }
-}
+    };
+};
 
 export const changeMinute = ({ minute }) => {
     return (dispatch) => {
@@ -19,8 +19,8 @@ export const changeMinute = ({ minute }) => {
             type: CHANGE_MINUTE,
             payload: minute
         });
-    }
-}
+    };
+};
 
 export const changeRingTone = ({ ringTone }) => {
     return (dispatch) => {
@@ -28,5 +28,5 @@ export const changeRingTone = ({ ringTone }) => {
             type: CHANGE_RING_TONE,
             payload: ringTone
         });
-    }
-}
+    };
+};
