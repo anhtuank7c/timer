@@ -1,4 +1,26 @@
 {
+    "ringTone": {
+        "id": "1",
+        "name": "Faded",
+        "path": "../../assets/faded.mp3"
+    },
+    "ringToneList": [
+        {
+            "id": "1",
+            "name": "Faded",
+            "path": "../../assets/faded.mp3"
+        },
+        {
+            "id": "2",
+            "name": "Con Tim Tan Vỡ",
+            "path": "../../assets/con_tim_tan_vo.mp3"
+        },
+        {
+            "id": "3",
+            "name": "Tweak it like Miley",
+            "path": "../../assets/tweak_it_like_miley.mp3"
+        }
+    ],
     "hourList": [
         "0",
         "1",

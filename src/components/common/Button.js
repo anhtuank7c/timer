@@ -22,7 +22,7 @@ const styles = {
         width: 72,
         height: 72,
         borderRadius: 36,
-        backgroundColor: 'rgba(255, 255, 255, 0.3)',
+        backgroundColor: '#141414',
     },
     outerBorder: {
         justifyContent: 'center',
@@ -31,12 +31,11 @@ const styles = {
         height: 80,
         borderRadius: 40,
         borderWidth: 2,
-        borderColor: 'rgba(255, 255, 255, 0.3)',
+        borderColor: '#141414',
     },
     text: {
-        color: 'rgba(255, 255, 255, 0.4)',
+        color: '#97979c',
         fontSize: 18,
-        fontWeight: '300',
     }
 };
 

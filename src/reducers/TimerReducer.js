@@ -1,7 +1,8 @@
 import {
     CHANGE_HOUR,
     CHANGE_MINUTE,
-    CHANGE_RING_TONE
+    CHANGE_RING_TONE,
+    CANCEL_PRESS
 } from '../actions/types';
 
 import data from './list.json';
@@ -11,7 +12,8 @@ const INITIAL = {
     minute: 1,
     hourList: data.hourList,
     minuteList: data.minuteList,
-    ringTone: '../../assets/faded.mp3',
+    ringTone: data.ringTone,
+    ringToneList: data.ringToneList,
 };
 
 export default (state = INITIAL, action) => {
@@ -22,6 +24,8 @@ export default (state = INITIAL, action) => {
             return { ...state, minute: action.payload };
         case CHANGE_RING_TONE:
             return { ...state, ringTone: action.payload };
+        case CANCEL_PRESS:
+            return INITIAL;
         default:
             return state;
     }
