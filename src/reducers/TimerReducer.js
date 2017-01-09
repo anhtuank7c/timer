@@ -4,6 +4,7 @@ import data from './list.json';
 const INITIAL = {
     hour: 0,
     minute: 1,
+    remaining: 0,
     hourList: data.hourList,
     minuteList: data.minuteList,
     ringTone: data.ringTone,

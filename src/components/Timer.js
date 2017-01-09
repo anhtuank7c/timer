@@ -65,6 +65,10 @@ const styles = {
         alignItems: 'center',
         paddingTop: 30,
     },
+    remaintingLabelStyle: {
+        color: '#fff',
+        fontSize: 50,
+    }
 };
 
 class Timer extends Component {
@@ -104,55 +108,79 @@ class Timer extends Component {
         Store.dispatch(NavigationActions.push(navigatorUID, Router.getRoute('ringToneList')));
     }
 
-    render() {
+    renderPickerOrRemainingTime() {
         const {
-            container,
             timePickerStyle,
             pickerStyle,
             pickerLabelStyle,
-            ringTonePickerStyle,
-            controlButtonStyle,
+            remaintingLabelStyle,
         } = styles;
         const {
             hourList,
             minuteList,
+            btnStartPauseLabel,
+            remaining,
+        } = this.props;
+        return (
+            btnStartPauseLabel === 'Pause' ?
+                (
+                    <View style={timePickerStyle}>
+                        <Text style={remaintingLabelStyle}>{remaining}</Text>
+                    </View>
+                ) :
+                (
+                    <View style={timePickerStyle}>
+                        <View style={pickerStyle}>
+                            <Text style={pickerLabelStyle}>hour</Text>
+                            <Picker
+                                style={{ width: width / 2 }}
+                                selectedValue={this.props.hour}
+                                onValueChange={this.onHourChange.bind(this)}
+                                itemStyle={{ color: '#fff', fontSize: 28, }} >
+                                {
+                                    hourList.map((val, i) => {
+                                        return (<Picker.Item label={val} key={`hour-${i}`} value={i} />);
+                                    })
+                                }
+                            </Picker>
+                        </View>
+                        <View style={pickerStyle}>
+                            <Text style={pickerLabelStyle}>minute</Text>
+                            <Picker
+                                style={{ width: width / 2 }}
+                                selectedValue={this.props.minute}
+                                onValueChange={this.onMinuteChange.bind(this)}
+                                itemStyle={{ color: '#fff', fontSize: 28, }} >
+                                {
+                                    minuteList.map((val, i) => {
+                                        return (<Picker.Item label={val} key={`minute-${i}`} value={i} />);
+                                    })
+                                }
+                            </Picker>
+                        </View>
+                    </View>
+                )
+        );
+    }
+
+    render() {
+        const {
+            container,
+            ringTonePickerStyle,
+            controlButtonStyle,
+        } = styles;
+        const {
             ringTone,
             btnCancelDisabled,
             btnStartPauseLabel,
         } = this.props;
+        const isStart = btnStartPauseLabel === 'Start';
+        const btnStartBackgroundColor = isStart ? Colors.btnStartColor : Colors.btnPauseColor;
+        const btnStartLabelColor = isStart ? Colors.btnStartLabelColor : Colors.btnPauseLabelColor;
 
         return (
             <View style={container}>
-                <View style={timePickerStyle}>
-                    <View style={pickerStyle}>
-                        <Text style={pickerLabelStyle}>hour</Text>
-                        <Picker
-                            style={{ width: width / 2 }}
-                            selectedValue={this.props.hour}
-                            onValueChange={this.onHourChange.bind(this)}
-                            itemStyle={{ color: '#fff', fontSize: 28, }} >
-                            {
-                                hourList.map((val, i) => {
-                                    return (<Picker.Item label={val} key={`hour-${i}`} value={i} />);
-                                })
-                            }
-                        </Picker>
-                    </View>
-                    <View style={pickerStyle}>
-                        <Text style={pickerLabelStyle}>minute</Text>
-                        <Picker
-                            style={{ width: width / 2 }}
-                            selectedValue={this.props.minute}
-                            onValueChange={this.onMinuteChange.bind(this)}
-                            itemStyle={{ color: '#fff', fontSize: 28, }} >
-                            {
-                                minuteList.map((val, i) => {
-                                    return (<Picker.Item label={val} key={`minute-${i}`} value={i} />);
-                                })
-                            }
-                        </Picker>
-                    </View>
-                </View>
+                {this.renderPickerOrRemainingTime()}
                 <TouchableOpacity onPress={this.gotoRingTone.bind(this)}>
                     <View style={ringTonePickerStyle}>
                         <Text style={{ color: '#fff', fontSize: 18, }}>When Timer Ends</Text>
@@ -166,7 +194,12 @@ class Timer extends Component {
                     <Button
                         disabled={btnCancelDisabled}
                         onPress={this.onCancelPress.bind(this)}>Cancel</Button>
-                    <Button onPress={this.onStartPausePress.bind(this)}>{btnStartPauseLabel}</Button>
+                    <Button
+                        btnEnabledColor={btnStartBackgroundColor}
+                        titleEnabledColor={btnStartLabelColor}
+                        onPress={this.onStartPausePress.bind(this)}>
+                        {btnStartPauseLabel}
+                    </Button>
                 </View>
             </View>
         );
@@ -186,6 +219,7 @@ const mapStateToProps = (state) => {
         ringTone,
         btnCancelDisabled,
         btnStartPauseLabel,
+        remaining,
     } = state.timer;
 
     return {
@@ -196,6 +230,7 @@ const mapStateToProps = (state) => {
         ringTone,
         btnCancelDisabled,
         btnStartPauseLabel,
+        remaining,
     };
 };
 

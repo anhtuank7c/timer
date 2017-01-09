@@ -9,6 +9,8 @@ export default {
     btnEnabledColor: '#272727',
     btnDisabledLabelColor: '#97979c',
     btnEnabledLabelColor: '#fff',
-    btnStartColor: '#3fb052',
-    btnPauseColor: '#ff9500',
+    btnStartColor: '#19351e',
+    btnPauseColor: '#3d280a',
+    btnStartLabelColor: '#3fb052',
+    btnPauseLabelColor: '#ff9500',
 };
