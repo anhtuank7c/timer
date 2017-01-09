@@ -38,8 +38,11 @@ export default (state = INITIAL, action) => {
         }
         case ActionTypes.CHANGE_RING_TONE:
             return { ...state, ringTone: action.payload };
-        case ActionTypes.CANCEL_PRESS:
-            return INITIAL;
+        case ActionTypes.CANCEL_PRESS: {
+            const { hour, minute } = action;
+            // Stop count down, but keep latest value of hour, minute
+            return { ...state, ...INITIAL, hour, minute };
+        }
         case ActionTypes.START_PRESS: {
             const { hour, minute, totalTime, remaining } = action;
             return {

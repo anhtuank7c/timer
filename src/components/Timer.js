@@ -113,7 +113,8 @@ class Timer extends Component {
     }
 
     onCancelPress() {
-        this.props.cancelPress();
+        const { hour, minute } = this.props;
+        this.props.cancelPress({ hour, minute });
     }
 
     onStartPauseResume() {
@@ -150,13 +151,19 @@ class Timer extends Component {
             hourList,
             minuteList,
             btnCancelDisabled,
-            remaining,
+            remaining
         } = this.props;
+
+        // format remaining in hh:MM:ss
+        const remainingString = new Date(null, null, null, null, null, remaining)
+            .toTimeString()
+            .replace(/.*(\d{2}:\d{2}:\d{2}).*/, '$1');
+
         return (
             !btnCancelDisabled ?
                 (
                     <View style={remaintingContainerStyle}>
-                        <Text style={remaintingLabelStyle}>{remaining}</Text>
+                        <Text style={remaintingLabelStyle}>{remainingString}</Text>
                     </View>
                 ) :
                 (

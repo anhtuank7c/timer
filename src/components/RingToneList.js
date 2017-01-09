@@ -4,7 +4,7 @@ import { View, Text } from 'react-native';
 class RingToneList extends Component {
     static route = {
         navigationBar: {
-            title: 'RingToneList'
+            title: 'When Timer Ends'
         }
     }
 

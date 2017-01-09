@@ -23,9 +23,11 @@ export const changeRingTone = ({ ringTone }) => {
     };
 };
 
-export const cancelPress = () => {
+export const cancelPress = ({ hour, minute }) => {
     return {
-        type: ActionTypes.CANCEL_PRESS
+        type: ActionTypes.CANCEL_PRESS,
+        hour,
+        minute
     };
 };
 
