@@ -6,6 +6,7 @@ import {
     Picker,
     TouchableOpacity
 } from 'react-native';
+
 import { NavigationActions } from '@exponent/ex-navigation';
 import { Ionicons } from '@exponent/vector-icons';
 import { connect } from 'react-redux';
@@ -18,9 +19,10 @@ import {
     changeHour,
     changeMinute,
     changeRingTone,
-    cancelCountDown,
-    startCountDown,
-    pauseCountDown,
+    cancelPress,
+    startPress,
+    pausePress,
+    updateRemainingTime,
 } from '../actions';
 
 const { width, height } = Dimensions.get('window');
@@ -38,6 +40,11 @@ const styles = {
         flexDirection: 'row',
         height: (height * 0.4),
         paddingTop: 20,
+    },
+    remaintingContainerStyle: {
+        height: (height * 0.4),
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     pickerStyle: {
         alignItems: 'center',
@@ -82,24 +89,47 @@ class Timer extends Component {
         }
     }
 
+    componentWillReceiveProps() {
+        this.timeout = setTimeout(() => {
+            const { remaining, pause } = this.props;
+            if (remaining > 0 && !pause) {
+                this.props.updateRemainingTime({ remaining: remaining - 1 });
+            }
+        }, 1000);
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this.timeout);
+    }
+
     onHourChange(hour) {
-        this.props.changeHour({ hour });
+        const { minute } = this.props;
+        this.props.changeHour({ hour, minute });
     }
 
     onMinuteChange(minute) {
-        this.props.changeMinute({ minute });
+        const { hour } = this.props;
+        this.props.changeMinute({ hour, minute });
     }
 
     onCancelPress() {
-        this.props.cancelCountDown();
+        this.props.cancelPress();
     }
 
-    onStartPausePress() {
-        const { btnStartPauseLabel } = this.props;
-        if (btnStartPauseLabel === 'Start') {
-            this.props.startCountDown();
+    onStartPauseResume() {
+        const { btnStartPauseLabel, hour, minute, remaining, totalTime } = this.props;
+        if (btnStartPauseLabel === 'Start' || btnStartPauseLabel === 'Resume') {
+            let localTotalTime = totalTime;
+            if (localTotalTime === 0) {
+                localTotalTime = ((hour * 60) + minute) * 60;
+            }
+            let localRemaining = remaining;
+            if (localRemaining === 0) {
+                localRemaining = localTotalTime;
+            }
+            this.props.startPress({ hour, minute, totalTime: localTotalTime, remaining: localRemaining });
         } else {
-            this.props.pauseCountDown();
+            this.props.pausePress();
         }
     }
 
@@ -114,17 +144,18 @@ class Timer extends Component {
             pickerStyle,
             pickerLabelStyle,
             remaintingLabelStyle,
+            remaintingContainerStyle,
         } = styles;
         const {
             hourList,
             minuteList,
-            btnStartPauseLabel,
+            btnCancelDisabled,
             remaining,
         } = this.props;
         return (
-            btnStartPauseLabel === 'Pause' ?
+            !btnCancelDisabled ?
                 (
-                    <View style={timePickerStyle}>
+                    <View style={remaintingContainerStyle}>
                         <Text style={remaintingLabelStyle}>{remaining}</Text>
                     </View>
                 ) :
@@ -174,7 +205,7 @@ class Timer extends Component {
             btnCancelDisabled,
             btnStartPauseLabel,
         } = this.props;
-        const isStart = btnStartPauseLabel === 'Start';
+        const isStart = (btnStartPauseLabel === 'Start' || btnStartPauseLabel === 'Resume');
         const btnStartBackgroundColor = isStart ? Colors.btnStartColor : Colors.btnPauseColor;
         const btnStartLabelColor = isStart ? Colors.btnStartLabelColor : Colors.btnPauseLabelColor;
 
@@ -197,7 +228,7 @@ class Timer extends Component {
                     <Button
                         btnEnabledColor={btnStartBackgroundColor}
                         titleEnabledColor={btnStartLabelColor}
-                        onPress={this.onStartPausePress.bind(this)}>
+                        onPress={this.onStartPauseResume.bind(this)}>
                         {btnStartPauseLabel}
                     </Button>
                 </View>
@@ -220,6 +251,8 @@ const mapStateToProps = (state) => {
         btnCancelDisabled,
         btnStartPauseLabel,
         remaining,
+        totalTime,
+        pause
     } = state.timer;
 
     return {
@@ -231,6 +264,8 @@ const mapStateToProps = (state) => {
         btnCancelDisabled,
         btnStartPauseLabel,
         remaining,
+        totalTime,
+        pause
     };
 };
 
@@ -238,7 +273,8 @@ export default connect(mapStateToProps, {
     changeHour,
     changeMinute,
     changeRingTone,
-    cancelCountDown,
-    startCountDown,
-    pauseCountDown,
+    cancelPress,
+    startPress,
+    pausePress,
+    updateRemainingTime,
 })(Timer);
