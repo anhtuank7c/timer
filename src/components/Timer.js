@@ -9,6 +9,7 @@ import { NavigationActions } from '@exponent/ex-navigation';
 import { Ionicons } from '@exponent/vector-icons';
 import { connect } from 'react-redux';
 
+import Colors from '../constant/Colors';
 import Store from '../Store';
 import Router from '../Router';
 import { Button } from './common';
