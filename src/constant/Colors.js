@@ -1,6 +1,8 @@
 export default {
     navbarColor: '#161616',
     navbarBorderColor: '#272727',
+    navbarButtonColor: '#ff9500',
+    navbarTitleColor: '#fff',
     containerColor: '#0d0d0d',
     tabbarColor: '#161616',
     tabbarIconDefault: '#97979c',
@@ -13,4 +15,8 @@ export default {
     btnPauseColor: '#3d280a',
     btnStartLabelColor: '#3fb052',
     btnPauseLabelColor: '#ff9500',
+    listItemColor: '#161616',
+    listItemBorderColor: '#272727',
+    listItemTextColor: '#fff',
+    itemCheckedColor: '#ff9500',
 };

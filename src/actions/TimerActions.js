@@ -16,6 +16,13 @@ export const changeMinute = ({ hour, minute }) => {
     };
 };
 
+export const choosingRingTone = ({ tmpRingTone }) => {
+    return {
+        type: ActionTypes.CHOOSING_RING_TONE,
+        payload: tmpRingTone
+    };
+};
+
 export const changeRingTone = ({ ringTone }) => {
     return {
         type: ActionTypes.CHANGE_RING_TONE,
@@ -48,7 +55,6 @@ export const pausePress = () => {
 };
 
 export const updateRemainingTime = ({ remaining }) => {
-    console.log('updateRemainingTime', remaining);
     return {
         type: ActionTypes.UPDATE_REMAINING_TIME,
         payload: remaining

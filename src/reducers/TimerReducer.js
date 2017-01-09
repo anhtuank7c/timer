@@ -11,6 +11,7 @@ const INITIAL = {
     hourList: data.hourList,
     minuteList: data.minuteList,
     ringTone: data.ringTone,
+    tmpRingTone: data.ringTone,
     ringToneList: data.ringToneList,
     btnCancelDisabled: true,
     btnStartPauseLabel: 'Start',
@@ -36,6 +37,8 @@ export default (state = INITIAL, action) => {
             }
             return { ...state, minute };
         }
+        case ActionTypes.CHOOSING_RING_TONE:
+            return { ...state, tmpRingTone: action.payload };
         case ActionTypes.CHANGE_RING_TONE:
             return { ...state, ringTone: action.payload };
         case ActionTypes.CANCEL_PRESS: {
