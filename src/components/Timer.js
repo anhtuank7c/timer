@@ -3,7 +3,8 @@ import {
     View,
     Text,
     Dimensions,
-    Picker
+    Picker,
+    TouchableOpacity
 } from 'react-native';
 import { NavigationActions } from '@exponent/ex-navigation';
 import { Ionicons } from '@exponent/vector-icons';
@@ -35,7 +36,7 @@ const styles = {
     },
     timePickerStyle: {
         flexDirection: 'row',
-        height: (height / 2),
+        height: (height * 0.4),
         paddingTop: 20,
     },
     pickerStyle: {
@@ -64,13 +65,6 @@ const styles = {
         alignItems: 'center',
         paddingTop: 30,
     },
-    tabbarStyle: {
-        height: 80,
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        backgroundColor: '#161616'
-    }
 };
 
 class Timer extends Component {
@@ -96,6 +90,15 @@ class Timer extends Component {
         this.props.cancelCountDown();
     }
 
+    onStartPausePress() {
+        const { btnStartPauseLabel } = this.props;
+        if (btnStartPauseLabel === 'Start') {
+            this.props.startCountDown();
+        } else {
+            this.props.pauseCountDown();
+        }
+    }
+
     gotoRingTone() {
         const navigatorUID = Store.getState().navigation.currentNavigatorUID;
         Store.dispatch(NavigationActions.push(navigatorUID, Router.getRoute('ringToneList')));
@@ -109,9 +112,14 @@ class Timer extends Component {
             pickerLabelStyle,
             ringTonePickerStyle,
             controlButtonStyle,
-            tabbarStyle
         } = styles;
-        const { hourList, minuteList, ringTone } = this.props;
+        const {
+            hourList,
+            minuteList,
+            ringTone,
+            btnCancelDisabled,
+            btnStartPauseLabel,
+        } = this.props;
 
         return (
             <View style={container}>
@@ -145,16 +153,20 @@ class Timer extends Component {
                         </Picker>
                     </View>
                 </View>
-                <View style={ringTonePickerStyle}>
-                    <Text style={{ color: '#fff', fontSize: 18, }}>When Timer Ends</Text>
-                    <View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
-                        <Text style={{ color: '#fff', fontSize: 18, marginRight: 10 }}>Faded</Text>
-                        <Ionicons name="ios-arrow-forward-outline" size={24} color="#fff" />
+                <TouchableOpacity onPress={this.gotoRingTone.bind(this)}>
+                    <View style={ringTonePickerStyle}>
+                        <Text style={{ color: '#fff', fontSize: 18, }}>When Timer Ends</Text>
+                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
+                            <Text style={{ color: '#fff', fontSize: 18, marginRight: 10 }}>{ringTone.name}</Text>
+                            <Ionicons name="ios-arrow-forward-outline" size={24} color="#fff" />
+                        </View>
                     </View>
-                </View>
+                </TouchableOpacity>
                 <View style={controlButtonStyle}>
-                    <Button onPress={this.onCancelPress.bind(this)}>Cancel</Button>
-                    <Button>Start</Button>
+                    <Button
+                        disabled={btnCancelDisabled}
+                        onPress={this.onCancelPress.bind(this)}>Cancel</Button>
+                    <Button onPress={this.onStartPausePress.bind(this)}>{btnStartPauseLabel}</Button>
                 </View>
             </View>
         );
@@ -166,8 +178,25 @@ class Timer extends Component {
 }
 
 const mapStateToProps = (state) => {
-    const { hourList, hour, minuteList, minute } = state.timer;
-    return { hourList, hour, minuteList, minute };
+    const {
+        hourList,
+        hour,
+        minuteList,
+        minute,
+        ringTone,
+        btnCancelDisabled,
+        btnStartPauseLabel,
+    } = state.timer;
+
+    return {
+        hourList,
+        hour,
+        minuteList,
+        minute,
+        ringTone,
+        btnCancelDisabled,
+        btnStartPauseLabel,
+    };
 };
 
 export default connect(mapStateToProps, {

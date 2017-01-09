@@ -5,6 +5,10 @@ export default {
     tabbarColor: '#161616',
     tabbarIconDefault: '#97979c',
     tabbarIconSelected: '#ff9500',
-    btnDisabled: '#141414',
-    btnEnabled: '#3fb052',
+    btnDisabledColor: '#141414',
+    btnEnabledColor: '#272727',
+    btnDisabledLabelColor: '#97979c',
+    btnEnabledLabelColor: '#fff',
+    btnStartColor: '#3fb052',
+    btnPauseColor: '#ff9500',
 };
