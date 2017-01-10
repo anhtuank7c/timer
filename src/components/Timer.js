@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import {
     View,
     Text,
-    Dimensions,
     Picker,
+    Dimensions,
     TouchableOpacity
 } from 'react-native';
 
@@ -11,6 +11,7 @@ import { NavigationActions, NavigationStyles } from '@exponent/ex-navigation';
 import { Ionicons } from '@exponent/vector-icons';
 import { connect } from 'react-redux';
 
+import Styles from '../constant/Styles';
 import Colors from '../constant/Colors';
 import Store from '../Store';
 import Router from '../Router';
@@ -25,9 +26,7 @@ import {
     updateRemainingTime,
 } from '../actions';
 
-const { width, height } = Dimensions.get('window');
-
-
+const { width } = Dimensions.get('window');
 class Timer extends Component {
     static route = {
         navigationBar: {
@@ -96,7 +95,7 @@ class Timer extends Component {
             pickerLabelStyle,
             remaintingLabelStyle,
             remaintingContainerStyle,
-        } = styles;
+        } = Styles;
         const {
             hourList,
             minuteList,
@@ -156,7 +155,7 @@ class Timer extends Component {
             container,
             ringTonePickerStyle,
             controlButtonStyle,
-        } = styles;
+        } = Styles;
         const {
             ringTone,
             btnCancelDisabled,
@@ -198,53 +197,6 @@ class Timer extends Component {
     //     this.props.navigator.push('home');
     // }
 }
-
-const styles = {
-    container: {
-        flex: 1,
-        backgroundColor: '#0d0d0d',
-    },
-    timePickerStyle: {
-        flexDirection: 'row',
-        height: (height * 0.4),
-        paddingTop: 20,
-    },
-    remaintingContainerStyle: {
-        height: (height * 0.4),
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    pickerStyle: {
-        alignItems: 'center',
-    },
-    pickerLabelStyle: {
-        color: '#fff',
-        fontSize: 18,
-    },
-    ringTonePickerStyle: {
-        height: 40,
-        backgroundColor: '#161616',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingLeft: 15,
-        paddingRight: 15,
-        borderTopWidth: 1,
-        borderTopColor: '#272727',
-        borderBottomWidth: 1,
-        borderBottomColor: '#272727'
-    },
-    controlButtonStyle: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        paddingTop: 30,
-    },
-    remaintingLabelStyle: {
-        color: '#fff',
-        fontSize: 50,
-    }
-};
 
 const mapStateToProps = (state) => {
     const {

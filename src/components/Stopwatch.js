@@ -1,29 +1,23 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
-import Colors from '../constant/Colors';
-
-const styles = {
-    titleStyle: {
-        fontSize: 24,
-        color: '#fff',
-    },
-};
+import { NavBar } from './common';
+import Styles from '../constant/Styles';
 
 class Stopwatch extends Component {
     static route = {
         navigationBar: {
-            title: 'Stopwatch',
-            titleStyle: styles.titleStyle,
-            backgroundColor: Colors.navbarColor,
-            borderBottomWidth: 1,
-            borderBottomColor: '#272727'
+            visible: false
         }
     }
 
     render() {
+        const { container } = Styles;
         return (
-            <View>
-                <Text>Stopwatch not implement yet</Text>
+            <View style={container}>
+                <NavBar title="World Clock" />
+                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                    <Text style={{ color: '#fff', fontSize: 30 }}>Stopwatch not implement yet</Text>
+                </View>
             </View>
         );
     }

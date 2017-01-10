@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ListView, ScrollView, View, Text } from 'react-native';
+import { ListView, ScrollView, View } from 'react-native';
 import { NavigationActions, NavigationStyles } from '@exponent/ex-navigation';
 import { connect } from 'react-redux';
 import Store from '../Store';
